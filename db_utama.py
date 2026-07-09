@@ -351,7 +351,7 @@ tahun = [
 "tahun":"2023",
 "icon":"📉",
 "status":"Arsip",
-"url":"https://dashboard2023.streamlit.app"
+"url":"https://dashboard-perkin-2023.streamlit.app/"
 },
 
 {
