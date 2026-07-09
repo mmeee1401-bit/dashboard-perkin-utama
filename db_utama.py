@@ -197,6 +197,35 @@ a[title="Open link"]{
     display:none !important;
 }
             
+.status-active{
+background:#D4EDDA;
+color:#0B7A39;
+}
+
+.status-archive{
+background:#E3F2FD;
+color:#1565C0;
+}
+
+.status-empty{
+background:#FFF3CD;
+color:#C27C00;
+}
+
+.status-coming{
+background:#F3F4F6;
+color:#666;
+}
+
+            /* Samakan tinggi semua tombol */
+div.stButton > button,
+div.stLinkButton > a{
+    width:100%;
+    height:44px;
+    border-radius:12px;
+    font-weight:600;
+}           
+            
 /* ===========================
 FOOTER
 =========================== */
@@ -242,14 +271,15 @@ font-size:42px;
 font-weight:700;
 margin-bottom:8px;">
 
-<b> 📊 Dashboard PERKIN </b>
+<b> Selamat Datang di Dashboard PERKIN</b>
 
 </div>
 
 <div style="
 font-size:18px;">
 
-Monitoring Kinerja Program Bangka Belitung
+Realisasi Kinerja Program Bangga Kencana
+Provinsi Kepulauan Bangka Belitung
 
 </div>
 
@@ -297,7 +327,7 @@ margin-bottom:8px;
 line-height:1.1;
 ">
 
-<b> Pilih Tahun Dashboard PERKIN </b>
+<b> Pilih tahun monitoring untuk melihat capaian indikator </b>
 
 </h1>
 
@@ -309,61 +339,63 @@ line-height:1.1;
 # =====================================================
 
 tahun = [
-    {
-        "tahun":"2022",
-        "icon":"🏅",
-        "status":"Arsip",
-        "url":"https://dashboard2022.streamlit.app"
-    },
 
-    {
-        "tahun":"2023",
-        "icon":"🏅",
-        "status":"Arsip",
-        "url":"https://dashboard2023.streamlit.app"
-    },
+{
+"tahun":"2022",
+"icon":"🗄️",
+"status":"Data Tidak Tersedia",
+"url":""
+},
 
-    {
-        "tahun":"2024",
-        "icon":"🏅",
-        "status":"Arsip",
-        "url":"https://dashboard2024.streamlit.app"
-    },
+{
+"tahun":"2023",
+"icon":"📉",
+"status":"Arsip",
+"url":"https://dashboard2023.streamlit.app"
+},
 
-    {
-        "tahun":"2025",
-        "icon":"🏅",
-        "status":"Arsip",
-        "url":"https://dashboard2025.streamlit.app"
-    },
+{
+"tahun":"2024",
+"icon":"📉",
+"status":"Arsip",
+"url":"https://dashboard-perkin-2024.streamlit.app/"
+},
 
-    {
-        "tahun":"2026",
-        "icon":"🏅",
-        "status":"Aktif",
-        "url":"https://dashboard-perkin-2026new.streamlit.app/"
-    },
+{
+"tahun":"2025",
+"icon":"📉",
+"status":"Arsip",
+"url":"https://dashboard-perkin-2025.streamlit.app/"
+},
 
-    {
-        "tahun":"2027",
-        "icon":"🏅",
-        "status":"Belum Terbit",
-        "url":"https://dashboard2027.streamlit.app"
-    },
+{
+"tahun":"2026",
+"icon":"⭐",
+"status":"Aktif",
+"url":"https://dashboard-perkin-2026new.streamlit.app/"
+},
 
-    {
-        "tahun":"2028",
-        "icon":"🏅",
-        "status":"Belum Trebit",
-        "url":"https://dashboard2028.streamlit.app"
-    },
+{
+"tahun":"2027",
+"icon":"📅",
+"status":"Belum Tersedia",
+"url":""
+},
 
-    {
-        "tahun":"2029",
-        "icon":"🏅",
-        "status":"Belum Terbit",
-        "url":"https://dashboard2029.streamlit.app"
-    }
+{
+"tahun":"2028",
+"icon":"📅",
+"status":"Belum Tersedia",
+"url":""
+},
+
+{
+"tahun":"2029",
+"icon":"📅",
+"status":"Belum Tersedia",
+"url":""
+}
+
 ]
 
 for i in range(0, len(tahun), 3):
@@ -375,30 +407,45 @@ for i in range(0, len(tahun), 3):
         with col:
 
             st.markdown(f"""
-<a href="{item['url']}" target="_blank" style="text-decoration:none;">
+            <div class="year-card">
 
-<div class="year-card">
+            <div class="year-icon">{item['icon']}</div>
 
-<div class="year-icon">
-{item['icon']}
-</div>
+            <div class="year-number">{item['tahun']}</div>
 
-<div class="year-number">
-{item['tahun']}
-</div>
+            <div class="year-text">
+            Dashboard PERKIN
+            </div>
 
-<div class="year-text">
-Dashboard PERKIN
-</div>
+            <div class="year-status">
+            {item['status']}
+            </div>
 
-<div class="year-status">
-{item['status']}
-</div>
+            </div>
+            """, unsafe_allow_html=True)
 
-</div>
+            
 
-</a>
-""", unsafe_allow_html=True)
+            if item["tahun"] == "2022":
+
+                if st.button("Buka Dashboard", key="2022", use_container_width=True):
+
+                    st.warning("⚠️ Data Dashboard PERKIN Tahun 2022 belum tersedia.")
+
+            elif item["tahun"] in ["2027","2028","2029"]:
+
+                if st.button("Buka Dashboard", key=item["tahun"], use_container_width=True):
+
+                    st.info("📅 Data Dashboard tahun ini belum tersedia.")
+
+            else:
+
+                st.link_button(
+                    "Buka Dashboard",
+                    item["url"],
+                    use_container_width=True
+                )
+
 
 # =====================================================
 # FOOTER
