@@ -349,14 +349,8 @@ div.stButton > button:hover{
 col1, col2 = st.columns([8,2])
 
 with col2:
-
     if st.button("⬅ Kembali ke Beranda", use_container_width=True):
-
-        components.html("""
-        <script>
-            window.location.href="https://dashboard-perkin-utama.streamlit.app/";
-        </script>
-        """, height=0)
+        st.switch_page("Home.py")
 
 col1, col2 = st.columns([8,4.5])
 
@@ -387,7 +381,7 @@ with col1:
 with col2:
     st.markdown("<div style='margin-top:20px'></div>", unsafe_allow_html=True)
     st.image(
-        "logo_bkkbnbaru.png",
+        "../assets/logo_bkkbnbaru.png",
         width=380
     )
     st.markdown("<div style='height:25px'></div>", unsafe_allow_html=True)
