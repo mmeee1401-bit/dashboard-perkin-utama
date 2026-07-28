@@ -8,7 +8,7 @@ import os
 # =====================================================
 
 NAMA_FILE_LOGO = "logo_bkkbnbaru.png"
-NAMA_FILE_GAMBAR_BABEL = "gambar.jpg"
+NAMA_FILE_GAMBAR_BABEL = "gambar1.jpg"
 
 # =====================================================
 # PAGE CONFIG & HELPER PEMBACA GAMBAR HANDAL
