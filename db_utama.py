@@ -438,13 +438,25 @@ for i in range(0, len(tahun), 3):
 
                     st.info("📅 Data Dashboard tahun ini belum tersedia.")
 
-            else:
+else:
 
-                st.link_button(
-                    "Buka Dashboard",
-                    item["url"],
-                    use_container_width=True
-                )
+    if st.button(
+        "Buka Dashboard",
+        key=item["tahun"],
+        use_container_width=True
+    ):
+
+        if item["tahun"] == "2023":
+            st.switch_page("pages/Dashboard_2023.py")
+
+        elif item["tahun"] == "2024":
+            st.switch_page("pages/Dashboard_2024.py")
+
+        elif item["tahun"] == "2025":
+            st.switch_page("pages/Dashboard_2025.py")
+
+        elif item["tahun"] == "2026":
+            st.switch_page("pages/Dashboard_2026.py")
 
 
 # =====================================================
