@@ -1,76 +1,62 @@
 import streamlit as st
 
-# =====================================================
-# PAGE CONFIG
-# =====================================================
-
 st.set_page_config(
     page_title="Dashboard PERKIN",
     page_icon="📊",
     layout="wide"
 )
 
-# =====================================================
+# ====================================================
 # CSS
-# =====================================================
+# ====================================================
 
 st.markdown("""
 <style>
 
-/* ===============================
+/* =========================
 BACKGROUND
-================================ */
+========================= */
 
 .stApp{
 
-background:
-linear-gradient(
-180deg,
-#F7FBFF 0%,
-#EEF5FD 100%);
+background:#EEF4FB;
+
+background-image:
+radial-gradient(circle at 15% 20%,rgba(46,134,255,.08) 0%,transparent 28%),
+radial-gradient(circle at 80% 10%,rgba(46,134,255,.08) 0%,transparent 25%),
+radial-gradient(circle at 70% 85%,rgba(46,134,255,.05) 0%,transparent 22%);
 
 }
 
-/* Hide Streamlit */
+/* Hide */
 
-#MainMenu{
-visibility:hidden;
-}
+#MainMenu{visibility:hidden;}
+header{visibility:hidden;}
+footer{visibility:hidden;}
 
-footer{
-visibility:hidden;
-}
-
-header{
-visibility:hidden;
-}
-
-/* ===============================
+/* =========================
 HERO
-================================ */
+========================= */
 
 .hero{
 
-background:
-linear-gradient(
-135deg,
-#0B4EA2,
-#2F80ED);
+background:linear-gradient(135deg,#0B4EA2,#4A90E2);
 
-border-radius:32px;
+padding:42px;
 
-padding:45px;
+border-radius:30px;
 
-overflow:hidden;
+color:white;
 
 position:relative;
 
-box-shadow:
-0 18px 45px rgba(0,0,0,.18);
+overflow:hidden;
 
-margin-bottom:35px;
+box-shadow:0 18px 45px rgba(0,0,0,.18);
 
 }
+
+/* lingkaran dekorasi */
 
 .hero:before{
 
@@ -78,17 +64,17 @@ content:"";
 
 position:absolute;
 
-width:420px;
+width:280px;
 
-height:420px;
+height:280px;
 
-background:rgba(255,255,255,.08);
+background:rgba(255,255,255,.06);
 
 border-radius:50%;
 
-right:-130px;
+top:-90px;
 
-top:-130px;
+right:-70px;
 
 }
 
@@ -98,17 +84,17 @@ content:"";
 
 position:absolute;
 
-width:250px;
+width:170px;
 
-height:250px;
+height:170px;
 
-background:rgba(255,255,255,.06);
+background:rgba(255,255,255,.05);
 
 border-radius:50%;
 
-left:-80px;
-
 bottom:-80px;
+
+left:-60px;
 
 }
 
@@ -118,73 +104,57 @@ font-size:48px;
 
 font-weight:700;
 
-color:white;
-
-margin-bottom:8px;
+margin-bottom:12px;
 
 }
 
-.hero-sub{
+.hero-desc{
 
-font-size:20px;
+font-size:19px;
 
-color:white;
+line-height:1.8;
 
 opacity:.95;
 
-line-height:1.6;
+margin-bottom:25px;
 
 }
 
-.hero-info{
+/* =========================
+BADGE
+========================= */
 
-display:flex;
+.badge{
 
-gap:15px;
-
-margin-top:30px;
-
-flex-wrap:wrap;
-
-}
-
-.hero-badge{
-
-background:rgba(255,255,255,.15);
+display:inline-block;
 
 padding:10px 18px;
 
-border-radius:40px;
+margin-right:10px;
 
-color:white;
+margin-top:10px;
 
-font-size:15px;
+background:rgba(255,255,255,.14);
+
+backdrop-filter:blur(8px);
+
+border-radius:50px;
+
+font-size:14px;
 
 font-weight:600;
 
-backdrop-filter:blur(10px);
-
 }
 
-/* ===============================
+/* =========================
 BUTTON
-================================ */
+========================= */
 
 div.stLinkButton>a{
 
-background:
-linear-gradient(
-135deg,
-#1565C0,
-#42A5F5);
+width:100%;
 
-color:white !important;
-
-border-radius:15px;
-
-height:48px;
-
-font-weight:700;
+height:52px;
 
 display:flex;
 
@@ -192,12 +162,21 @@ align-items:center;
 
 justify-content:center;
 
+border-radius:14px;
+
+font-weight:700;
+
+font-size:15px;
+
+background:linear-gradient(135deg,#0B4EA2,#2F80ED);
+
+color:white!important;
+
 border:none;
 
-transition:.35s;
+transition:.3s;
 
-box-shadow:
-0 8px 20px rgba(21,101,192,.25);
+box-shadow:0 10px 20px rgba(0,0,0,.18);
 
 }
 
@@ -205,53 +184,67 @@ div.stLinkButton>a:hover{
 
 transform:translateY(-3px);
 
-box-shadow:
-0 14px 28px rgba(21,101,192,.35);
+box-shadow:0 15px 30px rgba(0,0,0,.25);
 
-color:white !important;
+color:white!important;
 
 }
 
-/* ===============================
-SECTION TITLE
-================================ */
+/* =========================
+LOGO
+========================= */
 
-.section-title{
+.logo-card{
 
-font-size:36px;
+background:white;
 
-font-weight:700;
+border-radius:24px;
+
+padding:22px;
+
+box-shadow:0 12px 25px rgba(0,0,0,.08);
 
 text-align:center;
 
-color:#0B4EA2;
+}
 
-margin-top:20px;
+/* =========================
+SECTION TITLE
+========================= */
+
+.section-title{
+
+margin-top:50px;
 
 margin-bottom:30px;
 
+text-align:center;
+
+font-size:42px;
+
+font-weight:700;
+
+color:#0B4EA2;
+
 }
 
-/* ===============================
-STAT CARD
-================================ */
+/* =========================
+KPI CARD
+========================= */
 
 .stat-card{
 
 background:white;
 
-border-radius:22px;
+border-radius:24px;
 
-padding:28px;
+padding:35px;
 
 text-align:center;
 
-box-shadow:
-0 12px 28px rgba(0,0,0,.08);
+box-shadow:0 12px 30px rgba(0,0,0,.08);
 
 transition:.35s;
-
-border:1px solid #EAF1FB;
 
 }
 
@@ -259,22 +252,21 @@ border:1px solid #EAF1FB;
 
 transform:translateY(-8px);
 
-box-shadow:
-0 22px 45px rgba(0,0,0,.15);
+box-shadow:0 22px 40px rgba(0,0,0,.15);
 
 }
 
 .stat-icon{
 
-font-size:48px;
+font-size:55px;
 
-margin-bottom:8px;
+margin-bottom:10px;
 
 }
 
 .stat-number{
 
-font-size:38px;
+font-size:45px;
 
 font-weight:700;
 
@@ -284,162 +276,24 @@ color:#0B4EA2;
 
 .stat-label{
 
-font-size:16px;
+font-size:17px;
+
+color:#666;
 
 margin-top:8px;
-
-color:#666;
-
-}
-
-/* ===============================
-CARD TAHUN
-================================ */
-
-.year-card{
-
-background:white;
-
-border-radius:25px;
-
-padding:28px;
-
-box-shadow:
-0 15px 35px rgba(0,0,0,.08);
-
-transition:.35s;
-
-text-align:center;
-
-border:2px solid transparent;
-
-margin-bottom:20px;
-
-}
-
-.year-card:hover{
-
-transform:translateY(-10px);
-
-box-shadow:
-0 25px 50px rgba(0,0,0,.18);
-
-border:2px solid #1976D2;
-
-}
-
-.year-icon{
-
-font-size:65px;
-
-}
-
-.year-title{
-
-font-size:40px;
-
-font-weight:700;
-
-margin-top:10px;
-
-color:#0B4EA2;
-
-}
-
-.year-desc{
-
-margin-top:12px;
-
-font-size:15px;
-
-color:#666;
-
-min-height:45px;
-
-}
-
-.badge{
-
-display:inline-block;
-
-margin-top:20px;
-
-padding:8px 18px;
-
-border-radius:50px;
-
-font-weight:700;
-
-font-size:14px;
-
-}
-
-.badge-active{
-
-background:#D9F7E5;
-
-color:#0E8A47;
-
-}
-
-.badge-archive{
-
-background:#E7F0FF;
-
-color:#1565C0;
-
-}
-
-.badge-coming{
-
-background:#FFF6D8;
-
-color:#C78A00;
-
-}
-
-.badge-empty{
-
-background:#FFE4E4;
-
-color:#D93D3D;
-
-}
-
-/* ===============================
-FOOTER
-================================ */
-
-.footer{
-
-margin-top:50px;
-
-padding:28px;
-
-border-radius:25px;
-
-background:
-linear-gradient(
-135deg,
-#0B4EA2,
-#1976D2);
-
-color:white;
-
-text-align:center;
 
 }
 
 </style>
 """, unsafe_allow_html=True)
 
-# =====================================================
+# ====================================================
 # HERO
-# =====================================================
+# ====================================================
 
-hero1,hero2=st.columns([2.3,1])
+left,right=st.columns([7,3])
 
-with hero1:
+with left:
 
     st.markdown("""
 
@@ -451,44 +305,36 @@ with hero1:
 
 </div>
 
-<div class="hero-sub">
+<div class="hero-desc">
 
 Monitoring Realisasi Kinerja Program Bangga Kencana
 Provinsi Kepulauan Bangka Belitung
 
 </div>
 
-<div class="hero-info">
-
-<div class="hero-badge">
-
-⭐ Dashboard Aktif : <b>2026</b>
-
+<div class="badge">
+⭐ Dashboard Aktif : 2026
 </div>
 
-<div class="hero-badge">
-
+<div class="badge">
 📅 Last Update : Juli 2026
-
 </div>
 
-<div class="hero-badge">
-
+<div class="badge">
 📍 BKKBN Bangka Belitung
-
 </div>
 
 </div>
 
-</div>
+""",unsafe_allow_html=True)
 
-""", unsafe_allow_html=True)
+with right:
 
-with hero2:
+    st.markdown('<div class="logo-card">',unsafe_allow_html=True)
 
     st.image(
         "logo_bkkbnbaru.png",
-        use_container_width=True
+        width=260
     )
 
     st.link_button(
@@ -497,210 +343,256 @@ with hero2:
         use_container_width=True
     )
 
-# =====================================================
-# KPI
-# =====================================================
+    st.markdown("</div>",unsafe_allow_html=True)
 
-k1,k2,k3,k4=st.columns(4)
+st.markdown("<br>",unsafe_allow_html=True)
+
+# ====================================================
+# KPI
+# ====================================================
+
+k1,k2,k3,k4 = st.columns(4)
 
 with k1:
 
     st.markdown("""
-    <div class="stat-card">
-        <div class="stat-icon">📊</div>
-        <div class="stat-number">4</div>
-        <div class="stat-label">
-            Dashboard Tersedia
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
+
+<div class="stat-card">
+
+<div class="stat-icon">
+📊
+</div>
+
+<div class="stat-number">
+4
+</div>
+
+<div class="stat-label">
+Dashboard Tersedia
+</div>
+
+</div>
+
+""",unsafe_allow_html=True)
 
 with k2:
 
     st.markdown("""
-    <div class="stat-card">
-        <div class="stat-icon">⭐</div>
-        <div class="stat-number">1</div>
-        <div class="stat-label">
-            Dashboard Aktif
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
+
+<div class="stat-card">
+
+<div class="stat-icon">
+⭐
+</div>
+
+<div class="stat-number">
+1
+</div>
+
+<div class="stat-label">
+Dashboard Aktif
+</div>
+
+</div>
+
+""",unsafe_allow_html=True)
 
 with k3:
 
     st.markdown("""
-    <div class="stat-card">
-        <div class="stat-icon">🗂️</div>
-        <div class="stat-number">3</div>
-        <div class="stat-label">
-            Dashboard Arsip
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
+
+<div class="stat-card">
+
+<div class="stat-icon">
+🗂️
+</div>
+
+<div class="stat-number">
+3
+</div>
+
+<div class="stat-label">
+Dashboard Arsip
+</div>
+
+</div>
+
+""",unsafe_allow_html=True)
 
 with k4:
 
     st.markdown("""
-    <div class="stat-card">
-        <div class="stat-icon">📅</div>
-        <div class="stat-number">4</div>
-        <div class="stat-label">
-            Belum Tersedia
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
 
-# =====================================================
+<div class="stat-card">
+
+<div class="stat-icon">
+📅
+</div>
+
+<div class="stat-number">
+4
+</div>
+
+<div class="stat-label">
+Belum Tersedia
+</div>
+
+</div>
+
+""",unsafe_allow_html=True)
+
+# ====================================================
 # JUDUL
-# =====================================================
+# ====================================================
 
 st.markdown("""
+
 <div class="section-title">
+
 Pilih Tahun Monitoring
+
 </div>
-""", unsafe_allow_html=True)
 
-# =====================================================
-# DATA TAHUN
-# =====================================================
+""",unsafe_allow_html=True)
 
-tahun = [
+# ====================================================
+# DATA DASHBOARD
+# ====================================================
+
+dashboard = [
 
 {
-    "tahun":"2022",
-    "icon":"🗄️",
-    "status":"Data Tidak Tersedia",
-    "badge":"badge-empty",
-    "deskripsi":"Belum tersedia data monitoring",
-    "url":""
+"tahun":"2022",
+"icon":"🗄️",
+"desc":"Belum tersedia data monitoring",
+"status":"Data Tidak Tersedia",
+"class":"badge-empty",
+"url":""
 },
 
 {
-    "tahun":"2023",
-    "icon":"📉",
-    "status":"Arsip",
-    "badge":"badge-archive",
-    "deskripsi":"Lihat capaian tahun 2023",
-    "url":"https://dashboard-perkin-2023.streamlit.app/"
+"tahun":"2023",
+"icon":"📉",
+"desc":"Lihat capaian tahun 2023",
+"status":"Arsip",
+"class":"badge-archive",
+"url":"https://dashboard-perkin-2023.streamlit.app/"
 },
 
 {
-    "tahun":"2024",
-    "icon":"📉",
-    "status":"Arsip",
-    "badge":"badge-archive",
-    "deskripsi":"Lihat capaian tahun 2024",
-    "url":"https://dashboard-perkin-2024.streamlit.app/"
+"tahun":"2024",
+"icon":"📉",
+"desc":"Lihat capaian tahun 2024",
+"status":"Arsip",
+"class":"badge-archive",
+"url":"https://dashboard-perkin-2024.streamlit.app/"
 },
 
 {
-    "tahun":"2025",
-    "icon":"📉",
-    "status":"Arsip",
-    "badge":"badge-archive",
-    "deskripsi":"Lihat capaian tahun 2025",
-    "url":"https://dashboard-perkin-2025.streamlit.app/"
+"tahun":"2025",
+"icon":"📉",
+"desc":"Lihat capaian tahun 2025",
+"status":"Arsip",
+"class":"badge-archive",
+"url":"https://dashboard-perkin-2025.streamlit.app/"
 },
 
 {
-    "tahun":"2026",
-    "icon":"⭐",
-    "status":"Aktif",
-    "badge":"badge-active",
-    "deskripsi":"Dashboard Monitoring Terbaru",
-    "url":"https://dashboard-perkin-2026new.streamlit.app/"
+"tahun":"2026",
+"icon":"⭐",
+"desc":"Dashboard Monitoring Utama",
+"status":"Aktif",
+"class":"badge-active",
+"url":"https://dashboard-perkin-2026new.streamlit.app/"
 },
 
 {
-    "tahun":"2027",
-    "icon":"📅",
-    "status":"Belum Tersedia",
-    "badge":"badge-coming",
-    "deskripsi":"Segera Hadir",
-    "url":""
+"tahun":"2027",
+"icon":"📅",
+"desc":"Segera Hadir",
+"status":"Belum Tersedia",
+"class":"badge-coming",
+"url":""
 },
 
 {
-    "tahun":"2028",
-    "icon":"📅",
-    "status":"Belum Tersedia",
-    "badge":"badge-coming",
-    "deskripsi":"Segera Hadir",
-    "url":""
+"tahun":"2028",
+"icon":"📅",
+"desc":"Segera Hadir",
+"status":"Belum Tersedia",
+"class":"badge-coming",
+"url":""
 },
 
 {
-    "tahun":"2029",
-    "icon":"📅",
-    "status":"Belum Tersedia",
-    "badge":"badge-coming",
-    "deskripsi":"Segera Hadir",
-    "url":""
+"tahun":"2029",
+"icon":"📅",
+"desc":"Segera Hadir",
+"status":"Belum Tersedia",
+"class":"badge-coming",
+"url":""
 }
 
 ]
 
-# =====================================================
-# CARD DASHBOARD
-# =====================================================
+for i in range(0,len(dashboard),4):
 
-for i in range(0, len(tahun), 4):
+    cols=st.columns(4)
 
-    cols = st.columns(4)
-
-    for col, item in zip(cols, tahun[i:i+4]):
+    for col,item in zip(cols,dashboard[i:i+4]):
 
         with col:
 
             st.markdown(f"""
-            <div class="year-card">
 
-                <div class="year-icon">
-                    {item['icon']}
-                </div>
+<div class="year-card">
 
-                <div class="year-title">
-                    {item['tahun']}
-                </div>
+<div class="year-icon">
+{item["icon"]}
+</div>
 
-                <div class="year-desc">
-                    {item['deskripsi']}
-                </div>
+<div class="year-title">
+{item["tahun"]}
+</div>
 
-                <div class="badge {item['badge']}">
-                    {item['status']}
-                </div>
+<div class="year-desc">
+{item["desc"]}
+</div>
 
-            </div>
-            """, unsafe_allow_html=True)
+<div class="badge-status {item["class"]}">
+{item["status"]}
+</div>
 
-            # ==========================
+</div>
+
+""",unsafe_allow_html=True)
+
+            # ============================
             # BUTTON
-            # ==========================
+            # ============================
 
-            if item["tahun"] == "2022":
+            if item["tahun"]=="2022":
 
                 if st.button(
-                    "📂 Buka Dashboard",
+                    "📁 Buka Dashboard",
                     key="2022",
                     use_container_width=True
                 ):
 
                     st.warning(
-                        "⚠️ Data Dashboard PERKIN Tahun 2022 belum tersedia."
+                        "Data Dashboard PERKIN Tahun 2022 belum tersedia."
                     )
 
             elif item["tahun"] in ["2027","2028","2029"]:
 
                 if st.button(
-                    "📂 Buka Dashboard",
+                    "📁 Buka Dashboard",
                     key=item["tahun"],
                     use_container_width=True
                 ):
 
                     st.info(
-                        "📅 Dashboard tahun ini belum tersedia."
+                        "Dashboard tahun ini belum tersedia."
                     )
 
             else:
@@ -711,144 +603,366 @@ for i in range(0, len(tahun), 4):
                     use_container_width=True
                 )
 
-# =====================================================
-# INFORMASI DASHBOARD
-# =====================================================
+/* =========================
+YEAR CARD
+========================= */
 
-st.markdown("<br>", unsafe_allow_html=True)
+.year-card{
+
+background:white;
+
+border-radius:25px;
+
+padding:30px;
+
+text-align:center;
+
+box-shadow:0 12px 30px rgba(0,0,0,.08);
+
+transition:.35s;
+
+height:290px;
+
+display:flex;
+
+flex-direction:column;
+
+justify-content:center;
+
+}
+
+.year-card:hover{
+
+transform:translateY(-10px);
+
+box-shadow:0 20px 40px rgba(0,0,0,.15);
+
+}
+
+.year-icon{
+
+font-size:60px;
+
+margin-bottom:18px;
+
+}
+
+.year-title{
+
+font-size:36px;
+
+font-weight:700;
+
+color:#0B4EA2;
+
+}
+
+.year-desc{
+
+margin-top:10px;
+
+font-size:16px;
+
+color:#666;
+
+min-height:45px;
+
+}
+
+.badge-status{
+
+margin-top:18px;
+
+display:inline-block;
+
+padding:8px 18px;
+
+border-radius:50px;
+
+font-size:14px;
+
+font-weight:600;
+
+}
+
+.badge-active{
+
+background:#D8F5DD;
+
+color:#198754;
+
+}
+
+.badge-archive{
+
+background:#DCEEFF;
+
+color:#0B4EA2;
+
+}
+
+.badge-coming{
+
+background:#F3F4F6;
+
+color:#666;
+
+}
+
+.badge-empty{
+
+background:#FFF3CD;
+
+color:#B8860B;
+
+}
+
+# ====================================================
+# INFORMASI
+# ====================================================
+
+st.markdown("<br><br>", unsafe_allow_html=True)
 
 st.markdown("""
-<div style="
-background:linear-gradient(135deg,#FFFFFF,#F8FBFF);
-padding:35px;
-border-radius:28px;
-box-shadow:0 15px 35px rgba(0,0,0,.08);
-margin-top:20px;
-">
 
-<h2 style="
-color:#0B4EA2;
-margin-bottom:18px;
-text-align:center;
-">
+<div class="section-title">
 
 📢 Informasi Dashboard
 
-</h2>
-
-<div style="
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:20px;
-">
-
-<div style="
-background:#EEF5FF;
-padding:20px;
-border-radius:18px;
-">
-
-<h4>📊 Dashboard Aktif</h4>
-
-<p style="margin:0;">
-Dashboard PERKIN 2026 merupakan dashboard utama yang digunakan untuk monitoring capaian indikator Program Bangga Kencana Provinsi Kepulauan Bangka Belitung.
-</p>
-
 </div>
 
-<div style="
-background:#F4FFF5;
-padding:20px;
-border-radius:18px;
-">
-
-<h4>⭐ Update Berkala</h4>
-
-<p style="margin:0;">
-Data akan diperbarui secara berkala sesuai pelaporan dari Kabupaten/Kota.
-</p>
-
-</div>
-
-<div style="
-background:#FFF8E8;
-padding:20px;
-border-radius:18px;
-">
-
-<h4>🗂 Dashboard Arsip</h4>
-
-<p style="margin:0;">
-Dashboard tahun sebelumnya tetap dapat diakses sebagai arsip monitoring.
-</p>
-
-</div>
-
-<div style="
-background:#F5F5F5;
-padding:20px;
-border-radius:18px;
-">
-
-<h4>📅 Dashboard Mendatang</h4>
-
-<p style="margin:0;">
-Dashboard tahun berikutnya akan tersedia setelah periode pelaporan dimulai.
-</p>
-
-</div>
-
-</div>
-
-</div>
 """, unsafe_allow_html=True)
 
-# =====================================================
-# FOOTER
-# =====================================================
+c1,c2=st.columns(2)
 
-st.markdown("<br>", unsafe_allow_html=True)
+with c1:
+
+    st.markdown("""
+
+<div class="info-card blue">
+
+<div class="info-icon">
+
+📊
+
+</div>
+
+<h3>Dashboard Aktif</h3>
+
+<p>
+
+Dashboard PERKIN Tahun 2026 merupakan dashboard utama yang digunakan
+untuk monitoring capaian indikator Program Bangga Kencana
+Provinsi Kepulauan Bangka Belitung.
+
+</p>
+
+</div>
+
+""",unsafe_allow_html=True)
+
+    st.markdown("<br>",unsafe_allow_html=True)
+
+    st.markdown("""
+
+<div class="info-card yellow">
+
+<div class="info-icon">
+
+🗂️
+
+</div>
+
+<h3>Dashboard Arsip</h3>
+
+<p>
+
+Dashboard tahun 2023–2025 tetap tersedia sebagai arsip
+monitoring dan evaluasi kinerja.
+
+</p>
+
+</div>
+
+""",unsafe_allow_html=True)
+
+with c2:
+
+    st.markdown("""
+
+<div class="info-card green">
+
+<div class="info-icon">
+
+⭐
+
+</div>
+
+<h3>Update Berkala</h3>
+
+<p>
+
+Seluruh data akan diperbarui secara berkala
+sesuai hasil pelaporan Kabupaten/Kota.
+
+</p>
+
+</div>
+
+""",unsafe_allow_html=True)
+
+    st.markdown("<br>",unsafe_allow_html=True)
+
+    st.markdown("""
+
+<div class="info-card gray">
+
+<div class="info-icon">
+
+📅
+
+</div>
+
+<h3>Dashboard Mendatang</h3>
+
+<p>
+
+Dashboard Tahun 2027 dan seterusnya akan
+tersedia setelah periode pelaporan dimulai.
+
+</p>
+
+</div>
+
+""",unsafe_allow_html=True)
+
+/* ===========================
+INFO CARD
+=========================== */
+
+.info-card{
+
+padding:28px;
+
+border-radius:22px;
+
+box-shadow:0 12px 28px rgba(0,0,0,.08);
+
+transition:.35s;
+
+}
+
+.info-card:hover{
+
+transform:translateY(-8px);
+
+box-shadow:0 18px 35px rgba(0,0,0,.15);
+
+}
+
+.info-icon{
+
+font-size:45px;
+
+margin-bottom:15px;
+
+}
+
+.info-card h3{
+
+margin-bottom:12px;
+
+color:#0B4EA2;
+
+}
+
+.info-card p{
+
+line-height:1.8;
+
+font-size:15px;
+
+color:#555;
+
+}
+
+.blue{
+
+background:#EEF6FF;
+
+}
+
+.green{
+
+background:#EDFCEF;
+
+}
+
+.yellow{
+
+background:#FFF8E6;
+
+}
+
+.gray{
+
+background:#F5F5F5;
+
+}
 
 st.markdown("""
-<div class="footer">
+<style>
 
-<div style="font-size:30px;font-weight:700;">
+.footer-perkin {
+    background: linear-gradient(135deg, #0B4EA2, #2F80ED);
+    padding: 20px 30px;
+    border-radius: 15px;
+    margin-top: 40px;
+    color: white;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+}
 
-📊 Dashboard PERKIN
+.footer-perkin h4 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.footer-perkin p {
+    margin: 5px 0;
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+.footer-line {
+    height: 1px;
+    background: rgba(255,255,255,0.4);
+    margin: 15px 0;
+}
+
+</style>
+
+<div class="footer-perkin">
+
+<h4>
+📊 Dashboard PERKIN 2026
+</h4>
+
+<div class="footer-line"></div>
+
+<p>
+Sistem Visualisasi Data Kinerja
+</p>
+
+<p>
+© 2026 Kemendukbangga/BKKBN
+</p>
+
+<p>
+Dikembangkan untuk mendukung monitoring dan evaluasi program
+</p>
 
 </div>
 
-<div style="
-margin-top:10px;
-font-size:18px;
-opacity:.95;
-">
-
-Monitoring Kinerja Program Bangga Kencana
-Provinsi Kepulauan Bangka Belitung
-
-</div>
-
-<hr style="
-margin-top:25px;
-margin-bottom:25px;
-border:1px solid rgba(255,255,255,.2);
-">
-
-<div style="
-font-size:16px;
-line-height:2;
-">
-
-<b>Kementerian Kependudukan dan Pembangunan Keluarga / BKKBN</b><br>
-
-Perwakilan BKKBN Provinsi Kepulauan Bangka Belitung
-
-<br><br>
-
-© 2026 • Dashboard PERKIN
-
-</div>
-
-</div>
 """, unsafe_allow_html=True)
