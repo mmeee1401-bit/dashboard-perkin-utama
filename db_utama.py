@@ -302,10 +302,14 @@ with col2:
         unsafe_allow_html=True
     )
 
-    st.image(
-        "logo_bkkbnbaru.png",
-        width=380
-    )
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent
+
+st.image(
+    BASE_DIR / "assets" / "logo_bkkbnbaru.png",
+    width=380
+)
 
 
 # =====================================================
@@ -343,57 +347,49 @@ tahun = [
 {
 "tahun":"2022",
 "icon":"🗄️",
-"status":"Data Tidak Tersedia",
-"url":""
+"status":"Data Tidak Tersedia"
 },
 
 {
 "tahun":"2023",
 "icon":"📉",
-"status":"Arsip",
-"url":"https://dashboard-perkin-2023.streamlit.app/"
+"status":"Arsip"
 },
 
 {
 "tahun":"2024",
 "icon":"📉",
-"status":"Arsip",
-"url":"https://dashboard-perkin-2024.streamlit.app/"
+"status":"Arsip"
 },
 
 {
 "tahun":"2025",
 "icon":"📉",
-"status":"Arsip",
-"url":"https://dashboard-perkin-2025.streamlit.app/"
+"status":"Arsip"
 },
 
 {
 "tahun":"2026",
 "icon":"⭐",
-"status":"Aktif",
-"url":"https://dashboard-perkin-2026new.streamlit.app/"
+"status":"Aktif"
 },
 
 {
 "tahun":"2027",
 "icon":"📅",
-"status":"Belum Tersedia",
-"url":""
+"status":"Belum Tersedia"
 },
 
 {
 "tahun":"2028",
 "icon":"📅",
-"status":"Belum Tersedia",
-"url":""
+"status":"Belum Tersedia"
 },
 
 {
 "tahun":"2029",
 "icon":"📅",
-"status":"Belum Tersedia",
-"url":""
+"status":"Belum Tersedia"
 }
 
 ]
@@ -406,57 +402,45 @@ for i in range(0, len(tahun), 3):
 
         with col:
 
-            st.markdown(f"""
-            <div class="year-card">
-
-            <div class="year-icon">{item['icon']}</div>
-
-            <div class="year-number">{item['tahun']}</div>
-
-            <div class="year-text">
-            Dashboard PERKIN
-            </div>
-
-            <div class="year-status">
-            {item['status']}
-            </div>
-
-            </div>
-            """, unsafe_allow_html=True)
-
-            
+            st.markdown(...)
 
             if item["tahun"] == "2022":
 
-                if st.button("Buka Dashboard", key="2022", use_container_width=True):
-
+                if st.button(
+                    "Buka Dashboard",
+                    key="btn_2022",
+                    use_container_width=True
+                ):
                     st.warning("⚠️ Data Dashboard PERKIN Tahun 2022 belum tersedia.")
 
             elif item["tahun"] in ["2027","2028","2029"]:
 
-                if st.button("Buka Dashboard", key=item["tahun"], use_container_width=True):
-
+                if st.button(
+                    "Buka Dashboard",
+                    key=f"btn_{item['tahun']}",
+                    use_container_width=True
+                ):
                     st.info("📅 Data Dashboard tahun ini belum tersedia.")
 
-else:
+            else:
 
-    if st.button(
-        "Buka Dashboard",
-        key=item["tahun"],
-        use_container_width=True
-    ):
+                if st.button(
+                    "Buka Dashboard",
+                    key=f"btn_{item['tahun']}",
+                    use_container_width=True
+                ):
 
-        if item["tahun"] == "2023":
-            st.switch_page("pages/Dashboard_2023.py")
+                    if item["tahun"] == "2023":
+                        st.switch_page("pages/Dashboard_2023.py")
 
-        elif item["tahun"] == "2024":
-            st.switch_page("pages/Dashboard_2024.py")
+                    elif item["tahun"] == "2024":
+                        st.switch_page("pages/Dashboard_2024.py")
 
-        elif item["tahun"] == "2025":
-            st.switch_page("pages/Dashboard_2025.py")
+                    elif item["tahun"] == "2025":
+                        st.switch_page("pages/Dashboard_2025.py")
 
-        elif item["tahun"] == "2026":
-            st.switch_page("pages/Dashboard_2026.py")
+                    elif item["tahun"] == "2026":
+                        st.switch_page("pages/Dashboard_2026.py")
 
 
 # =====================================================
