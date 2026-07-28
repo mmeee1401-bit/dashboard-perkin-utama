@@ -258,6 +258,58 @@ text-align:center;
 # HEADER
 # =====================================================
 
+st.markdown("""
+<style>
+
+div.stLinkButton > a{
+
+    width:100%;
+    height:45px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background:linear-gradient(135deg,#0B4EA2,#2F80ED);
+
+    color:white !important;
+
+    text-decoration:none;
+
+    border-radius:12px;
+
+    font-weight:600;
+
+    border:none;
+
+    transition:.3s;
+
+    box-shadow:0 4px 12px rgba(11,78,162,.25);
+
+}
+
+div.stLinkButton > a:hover{
+
+    background:linear-gradient(135deg,#09448d,#1976D2);
+
+    transform:translateY(-2px);
+
+    color:white !important;
+
+}
+
+</style>
+""", unsafe_allow_html=True)
+
+col1, col2 = st.columns([8, 2])
+
+with col2:
+    st.link_button(
+        "🏠 Kembali ke SIPELIKES",
+        "https://ppid-kemendukbanggababel.my.canva.site/sipelikes/",
+        use_container_width=True
+    )
+
 col1,col2=st.columns([8,4.5])
 
 with col1:
