@@ -350,7 +350,7 @@ col1, col2 = st.columns([8,2])
 
 with col2:
     if st.button("⬅ Kembali ke Beranda", use_container_width=True):
-        st.switch_page("Home.py")
+        st.switch_page("db_utama.py")
 
 col1, col2 = st.columns([8,4.5])
 
