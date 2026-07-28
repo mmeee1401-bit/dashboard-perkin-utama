@@ -4,14 +4,14 @@ import os
 
 # =====================================================
 # 1. SETUP NAMA FILE GAMBAR LOKAL
-# (File logo & gambar.jpg di folder dashboard Anda)
+# (Menentukan nama file gambar di folder script Anda)
 # =====================================================
 
-FILE_LOGO_BKKBN = "logo_bkkbnbaru.png"
-FILE_GAMBAR_BABEL = "gambar1.jpg"
+NAMA_FILE_LOGO = "logo_bkkbnbaru.png"
+NAMA_FILE_GAMBAR_BABEL = "gambar.jpg"
 
 # =====================================================
-# PAGE CONFIG & HELPER FUNGSI GAMBAR
+# PAGE CONFIG & HELPER PEMBACA GAMBAR HANDAL
 # =====================================================
 
 st.set_page_config(
@@ -20,31 +20,49 @@ st.set_page_config(
     layout="wide"
 )
 
-def load_local_image_b64(image_path):
-    """Membaca file gambar lokal dan mengubahnya menjadi Base64"""
-    if os.path.exists(image_path):
-        ext = image_path.split('.')[-1].lower()
-        mime_type = "image/jpeg" if ext in ["jpg", "jpeg"] else "image/png" if ext == "png" else "image/svg+xml"
-        with open(image_path, "rb") as f:
-            encoded = base64.b64encode(f.read()).decode()
-            return f"data:{mime_type};base64,{encoded}"
+def load_local_image_b64(file_name):
+    """
+    Fungsi membaca gambar lokal dengan deteksi folder otomatis
+    agar selalu terbaca di Streamlit meskipun dijalankan dari mana saja.
+    """
+    # 1. Cek lokasi folder script python ini
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    full_path = os.path.join(script_dir, file_name)
+    
+    # 2. Jika tidak ada di folder script, coba cek relatif CWD
+    if not os.path.exists(full_path) and os.path.exists(file_name):
+        full_path = file_name
+        
+    if os.path.exists(full_path):
+        ext = full_path.split('.')[-1].lower()
+        mime_type = "image/jpeg" if ext in ["jpg", "jpeg"] else "image/png" if ext == "png" else f"image/{ext}"
+        try:
+            with open(full_path, "rb") as f:
+                encoded = base64.b64encode(f.read()).decode()
+                return f"data:{mime_type};base64,{encoded}"
+        except Exception:
+            return None
     return None
 
-logo_b64 = load_local_image_b64(FILE_LOGO_BKKBN)
-babel_img_b64 = load_local_image_b64(FILE_GAMBAR_BABEL)
+logo_b64 = load_local_image_b64(NAMA_FILE_LOGO)
+babel_img_b64 = load_local_image_b64(NAMA_FILE_GAMBAR_BABEL)
 
-# HTML untuk Logo Top Navbar
+# HTML Logo Top Navbar
 if logo_b64:
     logo_html = f'<img src="{logo_b64}" class="brand-logo-img" alt="Logo BKKBN" />'
 else:
     logo_html = f'<div style="font-size:38px;">🏛️</div>'
 
-# URL Fallback jika gambar.jpg belum tersimpan
-FALLBACK_URL = "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Mercusuar_Pulau_Lengkuas.jpg/800px-Mercusuar_Pulau_Lengkuas.jpg"
-bg_image_src = babel_img_b64 if babel_img_b64 else FALLBACK_URL
+# HTML Gambar Header (gambar.jpg)
+if babel_img_b64:
+    bg_image_html = f'<img src="{babel_img_b64}" class="hero-bg-blend-image" alt="Background Babel Landmark" />'
+else:
+    # URL Fallback jika file gambar.jpg belum ada di folder
+    FALLBACK_URL = "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Mercusuar_Pulau_Lengkuas.jpg/800px-Mercusuar_Pulau_Lengkuas.jpg"
+    bg_image_html = f'<img src="{FALLBACK_URL}" class="hero-bg-blend-image" alt="Background Babel Landmark" />'
 
 # =====================================================
-# STYLING (CSS DESAIN 100% PERSIS SEPERTI GAMBAR ANDA)
+# STYLING (CSS DENGAN BLEND & COMPATIBILITY SEMPURNA)
 # =====================================================
 
 st.markdown("""
@@ -110,7 +128,7 @@ html, body, [class*="css"] {
     margin-top: 2px;
 }
 
-/* Tombol Kembali ke SIPELIKES (Kanan Atas) */
+/* Tombol Kembali ke SIPELIKES */
 div.stLinkButton > a[href*="sipelikes"] {
     background: linear-gradient(135deg, #1565C0, #0D47A1) !important;
     color: white !important;
@@ -144,20 +162,19 @@ div.stLinkButton > a[href*="sipelikes"]:hover {
     min-height: 240px;
 }
 
-/* Gambar Blend Menyatu di Sisi Kanan Banner (Seamless Blend) */
+/* Gambar Blend Menyatu Secara Sempurna di Kanan Banner */
 .hero-bg-blend-image {
     position: absolute;
     right: 0;
     top: 0;
     bottom: 0;
-    width: 48%;
+    width: 52%;
     height: 100%;
     object-fit: cover;
     object-position: right center;
-    opacity: 0.65;
-    mix-blend-mode: luminosity;
-    -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,1) 0%, rgba(0,0,0,0.7) 50%, rgba(0,0,0,0) 100%);
-    mask-image: linear-gradient(to left, rgba(0,0,0,1) 0%, rgba(0,0,0,0.7) 50%, rgba(0,0,0,0) 100%);
+    opacity: 0.85;
+    -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,1) 0%, rgba(0,0,0,0.75) 50%, rgba(0,0,0,0) 100%);
+    mask-image: linear-gradient(to left, rgba(0,0,0,1) 0%, rgba(0,0,0,0.75) 50%, rgba(0,0,0,0) 100%);
     pointer-events: none;
     z-index: 1;
 }
@@ -245,7 +262,7 @@ div.stLinkButton > a[href*="sipelikes"]:hover {
     max-width: 240px;
     line-height: 1.45;
     font-weight: 500;
-    text-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    text-shadow: 0 2px 8px rgba(0,0,0,0.3);
 }
 
 @media (max-width: 992px) {
@@ -485,7 +502,7 @@ with c_nav2:
 # =====================================================
 
 hero_html = f"""<div class="hero-banner">
-<img src="{bg_image_src}" class="hero-bg-blend-image" alt="Background Babel Landmark" />
+{bg_image_html}
 
 <svg class="hero-map-svg" viewBox="0 0 500 320" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M120 40 C160 20, 220 30, 260 70 C290 100, 310 160, 280 220 C250 270, 190 280, 140 240 C100 200, 90 130, 110 80 Z" fill="white" opacity="0.8"/>
@@ -696,14 +713,14 @@ r3_cols = st.columns(3)
 with r3_cols[0]:
     item = tahun_data[6]
     st.markdown(f"""<div class="year-card-box {item['card_class']}"><div class="card-badge {item['badge_class']}">{item['status']}</div><div class="card-icon-circle {item['icon_bg']}">{item['icon']}</div><div class="card-year-num {item['num_class']}">{item['tahun']}</div><div class="card-year-sub {item['sub_class']}">Dashboard PERKIN</div><div class="card-year-desc {item['desc_class']}">{item['desc']}</div></div>""", unsafe_allow_html=True)
-    if st.button(item["button_text"], key=item["tahun"], use_container_width=True):
+    if st.button(item["button_text"], key="2028", use_container_width=True):
         st.info("📅 Data Dashboard tahun ini belum tersedia.")
 
 # 2029
 with r3_cols[1]:
     item = tahun_data[7]
     st.markdown(f"""<div class="year-card-box {item['card_class']}"><div class="card-badge {item['badge_class']}">{item['status']}</div><div class="card-icon-circle {item['icon_bg']}">{item['icon']}</div><div class="card-year-num {item['num_class']}">{item['tahun']}</div><div class="card-year-sub {item['sub_class']}">Dashboard PERKIN</div><div class="card-year-desc {item['desc_class']}">{item['desc']}</div></div>""", unsafe_allow_html=True)
-    if st.button(item["button_text"], key=item["tahun"], use_container_width=True):
+    if st.button(item["button_text"], key="2029", use_container_width=True):
         st.info("📅 Data Dashboard tahun ini belum tersedia.")
 
 # Card 9: Informasi Box
