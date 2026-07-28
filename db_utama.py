@@ -398,6 +398,111 @@ color:#B8860B;
 
 }
 
+/* ===========================
+INFO CARD
+=========================== */
+
+.info-card{
+
+padding:28px;
+
+border-radius:22px;
+
+box-shadow:0 12px 28px rgba(0,0,0,.08);
+
+transition:.35s;
+
+}
+
+.info-card:hover{
+
+transform:translateY(-8px);
+
+box-shadow:0 18px 35px rgba(0,0,0,.15);
+
+}
+
+.info-icon{
+
+font-size:45px;
+
+margin-bottom:15px;
+
+}
+
+.info-card h3{
+
+margin-bottom:12px;
+
+color:#0B4EA2;
+
+}
+
+.info-card p{
+
+line-height:1.8;
+
+font-size:15px;
+
+color:#555;
+
+}
+
+.blue{
+
+background:#EEF6FF;
+
+}
+
+.green{
+
+background:#EDFCEF;
+
+}
+
+.yellow{
+
+background:#FFF8E6;
+
+}
+
+.gray{
+
+background:#F5F5F5;
+
+}
+
+st.markdown("""
+<style>
+
+.footer-perkin {
+    background: linear-gradient(135deg, #0B4EA2, #2F80ED);
+    padding: 20px 30px;
+    border-radius: 15px;
+    margin-top: 40px;
+    color: white;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+}
+
+.footer-perkin h4 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.footer-perkin p {
+    margin: 5px 0;
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+.footer-line {
+    height: 1px;
+    background: rgba(255,255,255,0.4);
+    margin: 15px 0;
+}
+
 </style>
 """, unsafe_allow_html=True)
 
@@ -835,113 +940,6 @@ tersedia setelah periode pelaporan dimulai.
 </div>
 
 """,unsafe_allow_html=True)
-
-/* ===========================
-INFO CARD
-=========================== */
-
-.info-card{
-
-padding:28px;
-
-border-radius:22px;
-
-box-shadow:0 12px 28px rgba(0,0,0,.08);
-
-transition:.35s;
-
-}
-
-.info-card:hover{
-
-transform:translateY(-8px);
-
-box-shadow:0 18px 35px rgba(0,0,0,.15);
-
-}
-
-.info-icon{
-
-font-size:45px;
-
-margin-bottom:15px;
-
-}
-
-.info-card h3{
-
-margin-bottom:12px;
-
-color:#0B4EA2;
-
-}
-
-.info-card p{
-
-line-height:1.8;
-
-font-size:15px;
-
-color:#555;
-
-}
-
-.blue{
-
-background:#EEF6FF;
-
-}
-
-.green{
-
-background:#EDFCEF;
-
-}
-
-.yellow{
-
-background:#FFF8E6;
-
-}
-
-.gray{
-
-background:#F5F5F5;
-
-}
-
-st.markdown("""
-<style>
-
-.footer-perkin {
-    background: linear-gradient(135deg, #0B4EA2, #2F80ED);
-    padding: 20px 30px;
-    border-radius: 15px;
-    margin-top: 40px;
-    color: white;
-    text-align: center;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
-}
-
-.footer-perkin h4 {
-    margin: 0;
-    font-size: 18px;
-    font-weight: 700;
-}
-
-.footer-perkin p {
-    margin: 5px 0;
-    font-size: 14px;
-    opacity: 0.9;
-}
-
-.footer-line {
-    height: 1px;
-    background: rgba(255,255,255,0.4);
-    margin: 15px 0;
-}
-
-</style>
 
 <div class="footer-perkin">
 
