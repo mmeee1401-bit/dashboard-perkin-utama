@@ -1,4 +1,5 @@
 import streamlit as st
+from pathlib import Path
 
 # =====================================================
 # PAGE CONFIG
@@ -10,6 +11,8 @@ st.set_page_config(
     layout="wide"
 )
 
+BASE_DIR = Path(__file__).resolve().parent
+
 # =====================================================
 # CSS
 # =====================================================
@@ -17,239 +20,97 @@ st.set_page_config(
 st.markdown("""
 <style>
 
-/* Background */
-
 .stApp{
     background:#EEF4FB;
 }
 
-/* Hide Streamlit */
-
-#MainMenu{
-visibility:hidden;
-}
-
-footer{
-visibility:hidden;
-}
-
+#MainMenu,
+footer,
 header{
-visibility:hidden;
+    visibility:hidden;
 }
 
-/* Header */
+/* HEADER */
 
 .header{
-
-background:linear-gradient(
-135deg,
-#0B4EA2,
-#42A5F5);
-
-padding:35px;
-
-border-radius:28px;
-
-color:white;
-
-box-shadow:0 12px 30px rgba(0,0,0,.15);
-
+    background:linear-gradient(135deg,#0B4EA2,#42A5F5);
+    padding:35px;
+    border-radius:25px;
+    color:white;
+    box-shadow:0 10px 30px rgba(0,0,0,.15);
 }
 
-/* Tahun */
-
-.tahun-card{
-
-background:white;
-
-padding:25px;
-
-border-radius:22px;
-
-text-align:center;
-
-box-shadow:0 8px 20px rgba(0,0,0,.08);
-
-transition:.3s;
-
-margin-top:15px;
-
-}
-
-.tahun-card:hover{
-
-transform:translateY(-6px);
-
-}
-
-/* Footer */
-
-.footer{
-
-margin-top:45px;
-
-padding:20px;
-
-border-radius:18px;
-
-background:linear-gradient(
-90deg,
-#0B4EA2,
-#1976D2);
-
-color:white;
-
-text-align:center;
-
-}
-
-/* ==========================
-CARD DASHBOARD
-========================== */
-
-.year-link{
-    text-decoration:none !important;
-}
+/* CARD */
 
 .year-card{
-
     background:white;
     border-radius:18px;
-
-    padding:18px;
-
+    padding:22px;
     text-align:center;
-
     border:1px solid #E5ECF5;
-
-    box-shadow:0 8px 18px rgba(0,0,0,.08);
-
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
     transition:.3s;
-
-    margin-bottom:18px;
+    margin-bottom:15px;
 }
 
 .year-card:hover{
-
-    transform:translateY(-10px);
-
+    transform:translateY(-8px);
     box-shadow:0 18px 35px rgba(0,0,0,.18);
-
     border:2px solid #1976D2;
-
 }
 
 .year-icon{
     font-size:55px;
-    margin-bottom:8px;
 }
 
 .year-number{
-
     font-size:34px;
-
     font-weight:700;
-
     color:#0B4EA2;
-
 }
 
 .year-text{
-
-    margin-top:10px;
-
-    font-size:17px;
-
     color:#666;
-
-}
-
-.year-section{
-    margin-top:-60px;
+    margin-top:8px;
 }
 
 .year-status{
-
-    margin-top:18px;
-
     display:inline-block;
-
+    margin-top:15px;
     padding:7px 18px;
-
-    border-radius:50px;
-
+    border-radius:30px;
     background:#E3F2FD;
-
     color:#1565C0;
-
     font-weight:600;
-
-    font-size:14px;
-
 }
 
-/* Hilangkan icon link */
-a[title="Open link"]{
-    display:none !important;
-}
+/* BUTTON */
 
-[data-testid="stMarkdownContainer"] a svg{
-    display:none !important;
-}
-            
-.status-active{
-background:#D4EDDA;
-color:#0B7A39;
-}
-
-.status-archive{
-background:#E3F2FD;
-color:#1565C0;
-}
-
-.status-empty{
-background:#FFF3CD;
-color:#C27C00;
-}
-
-.status-coming{
-background:#F3F4F6;
-color:#666;
-}
-
-            /* Samakan tinggi semua tombol */
-div.stButton > button,
-div.stLinkButton > a{
+div.stButton > button{
     width:100%;
-    height:44px;
+    height:45px;
     border-radius:12px;
+    border:none;
+    background:linear-gradient(135deg,#0B4EA2,#2F80ED);
+    color:white;
     font-weight:600;
-}           
-            
-/* ===========================
-FOOTER
-=========================== */
+    transition:.3s;
+}
+
+div.stButton > button:hover{
+    transform:translateY(-3px);
+}
+
+/* FOOTER */
+
 .footer{
-margin-top:40px;
-padding:22px;
-background:linear-gradient(
-90deg,
-#0B4EA2,
-#1976D2);
-border-radius:18px;
-color:white;
-text-align:center;
+    margin-top:40px;
+    background:linear-gradient(90deg,#0B4EA2,#1976D2);
+    color:white;
+    border-radius:18px;
+    padding:25px;
+    text-align:center;
 }
-
-
-.footer h2 a{
-    display:none !important;
-}
-           
-.footer h2::after{
-    display:none !important;
-}
-
 
 </style>
 """, unsafe_allow_html=True)
@@ -258,141 +119,79 @@ text-align:center;
 # HEADER
 # =====================================================
 
-col1,col2=st.columns([8,4.5])
+col1, col2 = st.columns([8,4])
 
 with col1:
 
     st.markdown("""
+    <div class="header">
 
-<div class="header">
+    <div style="font-size:42px;font-weight:700;">
+    Selamat Datang di Dashboard PERKIN
+    </div>
 
-<div style="
-font-size:42px;
-font-weight:700;
-margin-bottom:8px;">
+    <br>
 
-<b> Selamat Datang di Dashboard PERKIN</b>
+    <div style="font-size:18px;">
+    Realisasi Kinerja Program Bangga Kencana
+    Provinsi Kepulauan Bangka Belitung
+    </div>
 
-</div>
+    <br>
 
-<div style="
-font-size:18px;">
+    <div style="font-size:15px;">
+    Kementerian Kependudukan dan Pembangunan Keluarga / BKKBN
+    </div>
 
-Realisasi Kinerja Program Bangga Kencana
-Provinsi Kepulauan Bangka Belitung
-
-</div>
-
-<div style="
-margin-top:18px;
-font-size:15px;">
-
-Kementerian Kependudukan dan Pembangunan Keluarga / BKKBN
-
-</div>
-
-</div>
-
-""",unsafe_allow_html=True)
+    </div>
+    """, unsafe_allow_html=True)
 
 with col2:
 
-    st.markdown(
-        "<div style='margin-top:20px'></div>",
-        unsafe_allow_html=True
+    st.image(
+        BASE_DIR / "assets" / "logo_bkkbnbaru.png",
+        use_container_width=True
     )
 
-from pathlib import Path
-
-BASE_DIR = Path(__file__).resolve().parent
-
-st.image(
-    BASE_DIR / "assets" / "logo_bkkbnbaru.png",
-    width=380
-)
-
-
-# =====================================================
-# JUDUL
-# =====================================================
+st.markdown("<br>", unsafe_allow_html=True)
 
 st.markdown("""
-<div style="
-text-align:center;
-margin-top:25px;
-margin-bottom:8px;
-">
-
-<h1 style="
+<h1 style='text-align:center;
 color:#0B4EA2;
-font-size:40px;
-font-weight:300;
-margin-bottom:8px;
-line-height:1.1;
-">
+font-size:42px;'>
 
-<b> Pilih tahun monitoring untuk melihat capaian indikator </b>
-
+Pilih Tahun Monitoring
 </h1>
 
-</div>
+<p style='text-align:center;
+font-size:20px;
+color:#555;'>
+
+Pilih dashboard berdasarkan tahun pelaporan.
+
+</p>
 """, unsafe_allow_html=True)
 
 # =====================================================
-# PILIHAN TAHUN
+# DATA TAHUN
 # =====================================================
 
 tahun = [
 
-{
-"tahun":"2022",
-"icon":"🗄️",
-"status":"Data Tidak Tersedia"
-},
-
-{
-"tahun":"2023",
-"icon":"📉",
-"status":"Arsip"
-},
-
-{
-"tahun":"2024",
-"icon":"📉",
-"status":"Arsip"
-},
-
-{
-"tahun":"2025",
-"icon":"📉",
-"status":"Arsip"
-},
-
-{
-"tahun":"2026",
-"icon":"⭐",
-"status":"Aktif"
-},
-
-{
-"tahun":"2027",
-"icon":"📅",
-"status":"Belum Tersedia"
-},
-
-{
-"tahun":"2028",
-"icon":"📅",
-"status":"Belum Tersedia"
-},
-
-{
-"tahun":"2029",
-"icon":"📅",
-"status":"Belum Tersedia"
-}
+    {"tahun":"2022","icon":"🗄️","status":"Data Tidak Tersedia"},
+    {"tahun":"2023","icon":"📉","status":"Arsip"},
+    {"tahun":"2024","icon":"📉","status":"Arsip"},
+    {"tahun":"2025","icon":"📉","status":"Arsip"},
+    {"tahun":"2026","icon":"⭐","status":"Aktif"},
+    {"tahun":"2027","icon":"📅","status":"Belum Tersedia"},
+    {"tahun":"2028","icon":"📅","status":"Belum Tersedia"},
+    {"tahun":"2029","icon":"📅","status":"Belum Tersedia"}
 
 ]
+
+# =====================================================
+# CARD
+# =====================================================
 
 for i in range(0, len(tahun), 3):
 
@@ -402,84 +201,108 @@ for i in range(0, len(tahun), 3):
 
         with col:
 
-            st.markdown(...)
+            # ---------- CARD ----------
+            st.markdown(f"""
+            <div class="year-card">
+
+                <div class="year-icon">
+                    {item['icon']}
+                </div>
+
+                <div class="year-number">
+                    {item['tahun']}
+                </div>
+
+                <div class="year-text">
+                    Dashboard PERKIN
+                </div>
+
+                <div class="year-status">
+                    {item['status']}
+                </div>
+
+            </div>
+            """, unsafe_allow_html=True)
+
+            # ---------- BUTTON ----------
 
             if item["tahun"] == "2022":
 
                 if st.button(
                     "Buka Dashboard",
-                    key="btn_2022",
+                    key="btn2022",
                     use_container_width=True
                 ):
-                    st.warning("⚠️ Data Dashboard PERKIN Tahun 2022 belum tersedia.")
+                    st.warning(
+                        "⚠️ Dashboard PERKIN Tahun 2022 belum tersedia."
+                    )
 
             elif item["tahun"] in ["2027","2028","2029"]:
 
                 if st.button(
                     "Buka Dashboard",
-                    key=f"btn_{item['tahun']}",
+                    key=f"btn{item['tahun']}",
                     use_container_width=True
                 ):
-                    st.info("📅 Data Dashboard tahun ini belum tersedia.")
+                    st.info(
+                        "📅 Dashboard tahun ini belum tersedia."
+                    )
 
-            else:
+            elif item["tahun"] == "2023":
 
                 if st.button(
                     "Buka Dashboard",
-                    key=f"btn_{item['tahun']}",
+                    key="btn2023",
                     use_container_width=True
                 ):
+                    st.switch_page("pages/Dashboard_2023.py")
 
-                    if item["tahun"] == "2023":
-                        st.switch_page("pages/Dashboard_2023.py")
+            elif item["tahun"] == "2024":
 
-                    elif item["tahun"] == "2024":
-                        st.switch_page("pages/Dashboard_2024.py")
+                if st.button(
+                    "Buka Dashboard",
+                    key="btn2024",
+                    use_container_width=True
+                ):
+                    st.switch_page("pages/Dashboard_2024.py")
 
-                    elif item["tahun"] == "2025":
-                        st.switch_page("pages/Dashboard_2025.py")
+            elif item["tahun"] == "2025":
 
-                    elif item["tahun"] == "2026":
-                        st.switch_page("pages/Dashboard_2026.py")
+                if st.button(
+                    "Buka Dashboard",
+                    key="btn2025",
+                    use_container_width=True
+                ):
+                    st.switch_page("pages/Dashboard_2025.py")
 
+            elif item["tahun"] == "2026":
 
-# =====================================================
-# FOOTER
-# =====================================================
+                if st.button(
+                    "Buka Dashboard",
+                    key="btn2026",
+                    use_container_width=True
+                ):
+                    st.switch_page("pages/Dashboard_2026.py")
 
-
-st.markdown("<br>", unsafe_allow_html=True)
-
+            st.markdown("<br><br>", unsafe_allow_html=True)
 
 st.markdown("""
 <div class="footer">
-           
-<h2 style="margin-bottom:8px;">
-Dashboard PERKIN 2026
+
+<h2>
+Dashboard PERKIN
 </h2>
-<div style="font-size:16px; opacity:.95;">
+
 Monitoring Kinerja Program Bangka Belitung
-</div>
-<br>
-<hr style="
-border:1px solid rgba(255,255,255,.25);
-">
-<div style="
-font-size:15px;
-line-height:1.8;
-">
+
+<br><br>
+
 <b>Kementerian Kependudukan dan Pembangunan Keluarga / BKKBN</b><br>
-<b> Perwakilan BKKBN</b><br>
-<b> Provinsi Kepulauan Bangka Belitung</b><br>
-<br>  
- ©
-<b>BKKBN</b> -
-<b>BANGKA BELITUNG</b> -
-<b>2026</b>
+Perwakilan BKKBN Provinsi Kepulauan Bangka Belitung
 
+<br><br>
 
-</div>
-
+© 2026
 
 </div>
 """, unsafe_allow_html=True)
